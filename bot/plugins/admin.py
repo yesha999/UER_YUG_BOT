@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery
 
 from bot.helpers.custom_filters import condition_is, admin_filter, is_user_banned
-from bot.db.db_functions.change_db_functions import change_user_condition, ban_user, unban_user
+from bot.db.db_functions.change_db_functions import change_user_condition, ban_user, unban_user, give_user_admin
 from bot.db.db_functions.check_db_functions import select_all_users_id, select_all_users_info, check_user_is_banned
 from bot.helpers.keyboards import main_menu_keyboard, admin_keyboard, back_keyboard, ban_keyboard, unban_keyboard
 from bot.helpers.messages import WELCOME_MESSAGE, WELCOME_ADMIN_PANEL_MESSAGE
@@ -71,6 +71,11 @@ async def check_user_callbacks(bot: Client, answer_message: CallbackQuery):
         unban_user(user_id)
         await answer_message.answer("▶✅Пользователь разблокирован")
         await bot.send_message(user_id, "▶✅Администратор Вас разблокировал")
+    if answer_message.data == "give_admin":
+        user_id = answer_message.message.text.split()[1:2][0]  # Второе слово в тексте сообщения было юзер id
+        give_user_admin(user_id)
+        await answer_message.answer("▶✅Пользователь стал администратором")
+        await bot.send_message(user_id, "▶✅Вы стали администратором")
 
 
 @Client.on_callback_query(admin_filter & condition_is("admin") & is_user_banned)

@@ -43,9 +43,11 @@ admin_keyboard = InlineKeyboardMarkup([[
 ])
 
 unban_keyboard = InlineKeyboardMarkup([
-    [InlineKeyboardButton("▶✅Разбанить", callback_data="unban_user")]
+    [InlineKeyboardButton("▶✅Разбанить", callback_data="unban_user")],
+    [InlineKeyboardButton("▶Сделать администратором", callback_data="give_admin")]
 ])
 
 ban_keyboard = InlineKeyboardMarkup([
-    [InlineKeyboardButton("⛔❌Забанить", callback_data="ban_user")]
+    [InlineKeyboardButton("⛔❌Забанить", callback_data="ban_user")],
+    [InlineKeyboardButton("▶Сделать администратором", callback_data="give_admin")]
 ])

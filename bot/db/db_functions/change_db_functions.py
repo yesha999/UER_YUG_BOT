@@ -214,3 +214,20 @@ def unban_user(user_id):
     cursor.execute(update_user_condition)
     connection.commit()
     cursor.close()
+
+
+def give_user_admin(user_id):
+    try:
+        with sqlite3.connect(database) as connection:
+            cursor = connection.cursor()
+    except sqlite3.Error as error:
+        print('База не работает')
+
+    update_user_condition = (f"""
+    UPDATE user SET is_admin=TRUE 
+    WHERE tg_id='{user_id}'
+    """)
+
+    cursor.execute(update_user_condition)
+    connection.commit()
+    cursor.close()
