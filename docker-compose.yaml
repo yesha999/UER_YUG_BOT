@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  bot:
+    build:
+      context: .
+    image: yesha999/uer_yug
+    environment:
+      API_ID: $API_ID
+      API_HASH: $API_ID
+      BOT_TOKEN: $BOT_TOKEN
+    ports:
+      - 10480:10480
+    volumes:
+      - ./.docker_env:/app/.env
