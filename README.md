@@ -11,7 +11,7 @@
 
 ## Ссылка на самого бота
 
-### [t.me/WikiAndTranslationBot](https://t.me/UER_YUG_bot)
+### [t.me/UER_YUG_bot](https://t.me/UER_YUG_bot)
 
 ## Ссылка канал жалоб и предложений
 
