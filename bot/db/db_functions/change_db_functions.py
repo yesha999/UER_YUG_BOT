@@ -62,6 +62,8 @@ def change_situation_address(message: Message):
 
 
 def set_situation_address_null(message: Message):
+    """Сбрасываем адрес, необходимо на случай, если пользователь укажет
+     адрес, потом нажмет назад и пропустит пункт"""
     try:
         with sqlite3.connect(database) as connection:
             cursor = connection.cursor()
@@ -103,6 +105,8 @@ def change_situation_media(message: Message):
 
 
 def set_situation_media_null(message: Message):
+    """Сбрасываем медиа, необходимо на случай, если пользователь укажет
+     медиа, потом нажмет назад и пропустит пункт"""
     try:
         with sqlite3.connect(database) as connection:
             cursor = connection.cursor()
@@ -159,6 +163,9 @@ def change_situation_description(message: Message):
 
 
 def change_user_condition(message: Message, new_condition: str):
+    """
+    Функция меняет состояние пользователя, в зависимости от него бот понимает что нужно отвечать
+    """
     try:
         with sqlite3.connect(database) as connection:
             cursor = connection.cursor()

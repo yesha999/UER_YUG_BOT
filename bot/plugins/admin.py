@@ -54,7 +54,7 @@ async def back_from_admin_mail(bot: Client, answer_message: CallbackQuery):
 
 
 @Client.on_callback_query(admin_filter & condition_is("check_user") & is_user_banned)
-async def back_from_check_user(bot: Client, answer_message: CallbackQuery):
+async def check_user_callbacks(bot: Client, answer_message: CallbackQuery):
     if answer_message.data == "back":
         change_user_condition(answer_message.message, "admin")
         await answer_message.message.reply_text(WELCOME_ADMIN_PANEL_MESSAGE, reply_markup=admin_keyboard)

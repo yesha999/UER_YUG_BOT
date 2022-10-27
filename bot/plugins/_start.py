@@ -7,8 +7,11 @@ from bot.helpers.custom_filters import condition_is, is_user_banned
 from bot.db.db_functions.change_db_functions import change_user_name, change_user_condition, change_user_phone
 from bot.db.db_functions.check_db_functions import check_user_is_registered
 from bot.helpers.keyboards import main_menu_keyboard
-from bot.helpers.messages import WELCOME_MESSAGE, FIRST_MESSAGE, PHONE_NUMBER_MESSAGE, NAME_ERROR_MESSAGE, PHONE_ERROR_MESSAGE
+from bot.helpers.messages import WELCOME_MESSAGE, FIRST_MESSAGE, PHONE_NUMBER_MESSAGE, NAME_ERROR_MESSAGE, \
+    PHONE_ERROR_MESSAGE
 
+
+# Файл называется _start чтобы быть первым в папке plugins, это позволяет выйти из любой ситуации командой /start
 
 @Client.on_message(filters.command("start") & filters.private & is_user_banned)
 async def start_bot(bot: Client, message: Message):

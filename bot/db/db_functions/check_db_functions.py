@@ -17,6 +17,9 @@ def data_base_connection() -> Cursor:
 
 
 def check_user_is_registered(message: Message) -> bool:
+    """
+    Проверка для /start, чтобы не просить имя и телефон повторно
+    """
     cursor = data_base_connection()
 
     select_query = f"""
@@ -34,6 +37,9 @@ def check_user_is_registered(message: Message) -> bool:
 
 
 def check_user_condition(message: Message) -> str:
+    """
+    Проверка состояния пользователя
+    """
     cursor = data_base_connection()
 
     select_query = f"""
