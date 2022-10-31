@@ -1,4 +1,4 @@
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup
 
 main_menu_keyboard = InlineKeyboardMarkup([[
     InlineKeyboardButton("📛 Оставить заявку", callback_data="app"),
@@ -51,3 +51,5 @@ ban_keyboard = InlineKeyboardMarkup([
     [InlineKeyboardButton("⛔❌Забанить", callback_data="ban_user")],
     [InlineKeyboardButton("▶Сделать администратором", callback_data="give_admin")]
 ])
+
+reply_markup_keyboard = ReplyKeyboardMarkup([[("Главное меню")]], one_time_keyboard=False, resize_keyboard=True)

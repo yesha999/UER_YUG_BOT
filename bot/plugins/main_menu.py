@@ -6,7 +6,7 @@ from bot.helpers.custom_filters import condition_is, is_user_banned
 from bot.db.db_functions.change_db_functions import change_user_condition
 from bot.db.db_functions.check_db_functions import check_user_phone, check_user_info
 from bot.helpers.keyboards import main_menu_keyboard, app_menu_keyboard, skip_back_keyboard, back_keyboard, \
-    user_settings_keyboard, communicate_method_keyboard, call_me_keyboard, end_dialog_keyboard
+    user_settings_keyboard, communicate_method_keyboard, call_me_keyboard, end_dialog_keyboard, reply_markup_keyboard
 from bot.helpers.messages import WELCOME_MESSAGE, REQUEST_MENU_MESSAGE, ADDRESS_MESSAGE, OFFER_MESSAGE, CONTACTS, \
     SETTINGS_MESSAGE, CHANGE_NAME_MESSAGE, CHANGE_PHONE_MESSAGE, CHOOSE_COMMUNICATE_METHOD_MESSAGE, \
     confirm_phone_number, DISPATCHER_WILL_CALL_MESSAGE, please_call_message, DISPATCHER_CHAT_MESSAGE
@@ -33,18 +33,18 @@ async def main_menu_callback(bot: Client, answer_message: CallbackQuery):
             text=WELCOME_MESSAGE, reply_markup=main_menu_keyboard)
 
     elif answer_message.data == 'contacts':
-        await answer_message.message.reply_text(CONTACTS)
+        await answer_message.message.reply_text(CONTACTS, reply_markup=reply_markup_keyboard)
 
     elif answer_message.data == 'settings':
         await answer_message.message.reply_text(SETTINGS_MESSAGE, reply_markup=user_settings_keyboard)
 
     elif answer_message.data == 'change_name':
         change_user_condition(answer_message.message, "change_name_settings")
-        await answer_message.message.reply_text(text=CHANGE_NAME_MESSAGE)
+        await answer_message.message.reply_text(text=CHANGE_NAME_MESSAGE, reply_markup=reply_markup_keyboard)
 
     elif answer_message.data == 'change_phone':
         change_user_condition(answer_message.message, "change_phone_settings")
-        await answer_message.message.reply_text(text=CHANGE_PHONE_MESSAGE)
+        await answer_message.message.reply_text(text=CHANGE_PHONE_MESSAGE, reply_markup=reply_markup_keyboard)
 
     elif answer_message.data == 'communicate':
         await answer_message.message.reply_text(text=CHOOSE_COMMUNICATE_METHOD_MESSAGE,

@@ -6,7 +6,7 @@ from pyrogram.types import Message
 from bot.helpers.custom_filters import condition_is, is_user_banned
 from bot.db.db_functions.change_db_functions import change_user_name, change_user_condition, change_user_phone
 from bot.db.db_functions.check_db_functions import check_user_phone
-from bot.helpers.keyboards import call_me_keyboard
+from bot.helpers.keyboards import call_me_keyboard, reply_markup_keyboard
 from bot.helpers.messages import NAME_ERROR_MESSAGE, PHONE_ERROR_MESSAGE, \
     CHANGE_NAME_SUCCESS_MESSAGE, CHANGE_PHONE_SUCCESS_MESSAGE, confirm_phone_number
 
@@ -19,7 +19,7 @@ async def change_name_settings(bot: Client, message: Message):
         change_user_condition(message, "main_menu")
         await message.reply_text(CHANGE_NAME_SUCCESS_MESSAGE)
     else:
-        await message.reply_text(text=NAME_ERROR_MESSAGE)
+        await message.reply_text(text=NAME_ERROR_MESSAGE, reply_markup=reply_markup_keyboard)
 
 
 @Client.on_message(filters.text & filters.private & condition_is('change_phone_settings') & is_user_banned)
@@ -30,7 +30,7 @@ async def change_phone_settings(bot: Client, message: Message):
     if check_phone_regular1 or check_phone_regular2:
         change_user_phone(message)
         change_user_condition(message, "main_menu")
-        await message.reply_text(CHANGE_PHONE_SUCCESS_MESSAGE)
+        await message.reply_text(CHANGE_PHONE_SUCCESS_MESSAGE, reply_markup=reply_markup_keyboard)
     else:
         await message.reply_text(text=PHONE_ERROR_MESSAGE)
 

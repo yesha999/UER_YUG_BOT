@@ -1,19 +1,19 @@
 import re
 
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.types import Message, ReplyKeyboardMarkup
 
 from bot.helpers.custom_filters import condition_is, is_user_banned
 from bot.db.db_functions.change_db_functions import change_user_name, change_user_condition, change_user_phone
 from bot.db.db_functions.check_db_functions import check_user_is_registered
-from bot.helpers.keyboards import main_menu_keyboard
+from bot.helpers.keyboards import main_menu_keyboard, reply_markup_keyboard
 from bot.helpers.messages import WELCOME_MESSAGE, FIRST_MESSAGE, PHONE_NUMBER_MESSAGE, NAME_ERROR_MESSAGE, \
     PHONE_ERROR_MESSAGE
 
 
 # Файл называется _start чтобы быть первым в папке plugins, это позволяет выйти из любой ситуации командой /start
 
-@Client.on_message(filters.command("start") & filters.private & is_user_banned)
+@Client.on_message((filters.command("start") | filters.regex("^Главное меню$")) & filters.private & is_user_banned)
 async def start_bot(bot: Client, message: Message):
     is_registered = check_user_is_registered(message)
     if is_registered:
@@ -42,6 +42,7 @@ async def phone_registration(bot: Client, message: Message):
     if check_phone_regular1 or check_phone_regular2:
         change_user_phone(message)
         change_user_condition(message, 'main_menu')
+        await message.reply_text(text='Регистрация успешно завершена!', reply_markup=reply_markup_keyboard)
         await start_bot(bot, message)
     else:
         await message.reply_text(text=PHONE_ERROR_MESSAGE)

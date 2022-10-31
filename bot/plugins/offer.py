@@ -7,7 +7,7 @@ from bot.db.db_functions.change_db_functions import change_user_condition, chang
     set_situation_media_null, \
     change_situation_description, set_situation_description_null
 from bot.db.db_functions.check_db_functions import check_user_situation
-from bot.helpers.keyboards import app_menu_keyboard
+from bot.helpers.keyboards import app_menu_keyboard, reply_markup_keyboard
 from bot.helpers.messages import REQUEST_MENU_MESSAGE, OFFER_THANKS, offer_chat_message
 
 
@@ -17,7 +17,7 @@ async def user_offer(bot: Client, message: Message):
     change_situation_description(message)
     if message.photo:
         change_situation_media(message)
-    await message.reply_text(OFFER_THANKS)
+    await message.reply_text(OFFER_THANKS, reply_markup=reply_markup_keyboard)
 
     user_situation_info: dict = check_user_situation(message)
     if user_situation_info["situation_media"]:

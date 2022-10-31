@@ -7,7 +7,7 @@ from bot.db.db_functions.change_db_functions import change_user_condition, chang
     change_situation_media, set_situation_address_null, set_situation_media_null, \
     change_situation_description, set_situation_description_null
 from bot.db.db_functions.check_db_functions import check_user_situation
-from bot.helpers.keyboards import app_menu_keyboard, skip_back_keyboard, back_keyboard
+from bot.helpers.keyboards import app_menu_keyboard, skip_back_keyboard, back_keyboard, reply_markup_keyboard
 from bot.helpers.messages import REQUEST_MENU_MESSAGE, ADDRESS_MESSAGE, MEDIA_MESSAGE, MEDIA_ERROR_MESSAGE, DESCRIPTION_MESSAGE, \
     REQUEST_THANK_YOU_MESSAGE, request_chat_message
 
@@ -62,7 +62,7 @@ async def skip_media(bot: Client, answer_message: CallbackQuery):
 async def problem_description(bot: Client, message: Message):
     change_user_condition(message, "main_menu")
     change_situation_description(message)
-    await message.reply_text(REQUEST_THANK_YOU_MESSAGE)
+    await message.reply_text(REQUEST_THANK_YOU_MESSAGE, reply_markup=reply_markup_keyboard)
     user_situation_info: dict = check_user_situation(message)
     if user_situation_info["situation_media"]:
         try:
